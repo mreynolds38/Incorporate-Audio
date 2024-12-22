@@ -1,0 +1,158 @@
+<!-- Michael Reynolds - Game of 21 - Last Updated: 2024-12-21 -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Casino Royale - Game of 21!</title>
+    <!-- Google Fonts for enhanced typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Main body styles with casino theme */
+        body {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            text-align: center;
+            font-family: 'Roboto', sans-serif;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Decorative card suits background */
+        body::before {
+            content: '♠ ♥ ♣ ♦';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            font-size: 100px;
+            color: rgba(255, 255, 255, 0.03);
+            pointer-events: none;
+            z-index: -1;
+            animation: floatingSuits 30s linear infinite;
+        }
+
+        @keyframes floatingSuits {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
+        }
+
+        /* Game title styling */
+        h1 {
+            font-family: 'Playfair Display', serif;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+
+        /* Main game area styling */
+        #gameArea {
+            background: rgba(255, 255, 255, 0.1);
+            margin: 20px auto;
+            padding: 30px;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Card display area */
+        .card-display {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        /* Button styling with casino theme */
+        button {
+            background: linear-gradient(to bottom, #ffd700, #ffb700);
+            color: #000;
+            padding: 12px 25px;
+            margin: 8px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to bottom, #ffe44d, #ffc44d);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        /* Sound control styling */
+        #soundControl {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #soundControl:hover {
+            transform: scale(1.1);
+        }
+
+        /* Score display styling */
+        .score {
+            font-size: 1.2em;
+            margin: 15px 0;
+            color: #ffd700;
+        }
+
+        /* Animation for winning messages */
+        @keyframes winningGlow {
+            0% { text-shadow: 0 0 5px #ffd700; }
+            50% { text-shadow: 0 0 20px #ffd700; }
+            100% { text-shadow: 0 0 5px #ffd700; }
+        }
+
+        .winning-message {
+            animation: winningGlow 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sound control button -->
+<div id="soundControl" onclick="toggleSound()">
+    🔊
+</div>
+
+<!-- Audio elements -->
+<audio id="backgroundMusic" src="audio/casino-music.mp3" loop></audio>
+<audio id="cardSound" src="audio/card-sound.mp3"></audio>
+<audio id="winSound" src="audio/win-sound.mp3"></audio>
+<audio id="loseSound" src="audio/lose-sound.mp3"></audio>
+
+<!-- Main game area -->
+    <div id="gameArea"></div>
+
+    <!-- Game control buttons -->
+    <div class="button-container">
+        <button onclick="hitMe()">Hit Me!</button>
+        <button onclick="stay()">Stay</button>
+        <button onclick="newGame()">New Game</button>
+    </div>
+
+    <!-- Link to our JavaScript file -->
+    <script src="gameBehavor.js"></script>
+</body>
+</html>
